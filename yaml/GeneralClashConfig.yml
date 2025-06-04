@@ -1,20 +1,24 @@
 mixed-port: 7890
 socks-port: 7891
-allow-lan: false
-log-level: info  # 临时改为info，便于调试
+allow-lan: false  # 若需局域网共享，改为true并添加authentication
+bind-address: "192.168.1.0/24"  # 可选，局域网共享时使用
+mode: rule
+log-level: info  # 调试后改为error
 external-controller: 127.0.0.1:9090
+ipv6: false  # 若需IPv6，改为true
+tcp-concurrent: true
+unified-delay: true
 dns:
   enable: true
-  listen: 0.0.0.0:7874  # 更改为7874，避免53端口冲突
+  listen: 0.0.0.0:7874
   ipv6: false
   enhanced-mode: fake-ip
   fake-ip-range: 198.18.0.1/16
-  fake-ip-filter:
-    - "*.lan"
-    - "*.cn"
-    - "+.qq.com"
-    - "+.baidu.com"
-    - "+.bilibili.com"
+  cache: true
+  cache-algorithm: arc
+  default-nameserver:
+    - 223.5.5.5
+    - 119.29.29.29
   nameserver:
     - 119.29.29.29
     - 223.5.5.5
@@ -26,11 +30,24 @@ dns:
     geoip: true
     ipcidr:
       - 240.0.0.0/4
+  fake-ip-filter:
+    - "*.lan"
+    - "*.cn"
+    - "+.qq.com"
+    - "+.baidu.com"
+    - "+.bilibili.com"
+    - "+.msftconnecttest.com"
+    - "+.msftncsi.com"
+    - "localhost.ptlogin2.qq.com"
+    - "localhost.sec.qq.com"
 tun:
   enable: true
-  stack: system
+  stack: gvisor
   auto-route: true
   auto-detect-interface: true
   dns-hijack:
     - any:7874
     - tcp://any:7874
+profile:
+  store-selected: false
+  store-fake-ip: true
