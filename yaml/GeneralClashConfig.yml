@@ -1,0 +1,36 @@
+mixed-port: 7890
+socks-port: 7891
+allow-lan: false
+log-level: info  # 临时改为info，便于调试
+external-controller: 127.0.0.1:9090
+dns:
+  enable: true
+  listen: 0.0.0.0:7874  # 更改为7874，避免53端口冲突
+  ipv6: false
+  enhanced-mode: fake-ip
+  fake-ip-range: 198.18.0.1/16
+  fake-ip-filter:
+    - "*.lan"
+    - "*.cn"
+    - "+.qq.com"
+    - "+.baidu.com"
+    - "+.bilibili.com"
+  nameserver:
+    - 119.29.29.29
+    - 223.5.5.5
+    - https://dns.alidns.com/dns-query
+  fallback:
+    - https://cloudflare-dns.com/dns-query
+    - https://dns.google/dns-query
+  fallback-filter:
+    geoip: true
+    ipcidr:
+      - 240.0.0.0/4
+tun:
+  enable: true
+  stack: system
+  auto-route: true
+  auto-detect-interface: true
+  dns-hijack:
+    - any:7874
+    - tcp://any:7874
