@@ -1,25 +1,26 @@
 mixed-port: 7890
-socks-port: 7891
-allow-lan: false  # 若需局域网共享，改为true并添加authentication
-bind-address: "192.168.1.0/24"  # 可选，局域网共享时使用
-mode: rule
-log-level: info  # 调试后改为error
-external-controller: 127.0.0.1:9090
-ipv6: false  # 若需IPv6，改为true
-tcp-concurrent: true
-unified-delay: true
+allow-lan: true
+ipv6: false
+mode: Rule
+log-level: info
+external-controller: 0.0.0.0:9090
+secret: "op123456"
+#find-process-mode: off
+global-client-fingerprint: chrome
+global-ua: clash.meta
+profile:
+  store-selected: true
+  store-fake-ip: true
 dns:
   enable: true
-  listen: 0.0.0.0:7874
   ipv6: false
   enhanced-mode: fake-ip
   fake-ip-range: 198.18.0.1/16
-  cache: true
-  cache-algorithm: arc
-  nameserver:
+  listen: 0.0.0.0:7874
+  nameserver: 
     - 218.85.157.99
-    - 223.5.5.5
     - https://dns.alidns.com/dns-query
+    - 119.29.29.29
   default-nameserver:
     - 223.5.5.5
     - 8.8.4.4
@@ -27,13 +28,6 @@ dns:
     - https://dns.alidns.com/dns-query
     - https://dns.pub/dns-query
     - 8.8.8.8  # 备用传统 DNS
-  fallback:
-    - https://cloudflare-dns.com/dns-query
-    - https://dns.google/dns-query
-  fallback-filter:
-    geoip: true
-    ipcidr:
-      - 240.0.0.0/4
   fake-ip-filter:
     - "*.lan"
     - "*.localdomain"
