@@ -16,13 +16,13 @@ dns:
   fake-ip-range: 198.18.0.1/16
   cache: true
   cache-algorithm: arc
-  default-nameserver:
-    - 223.5.5.5
-    - 119.29.29.29
   nameserver:
-    - 119.29.29.29
+    - 218.85.157.99
     - 223.5.5.5
     - https://dns.alidns.com/dns-query
+  default-nameserver:
+    - 223.5.5.5
+    - 8.8.4.4
   proxy-server-nameserver:
     - https://dns.alidns.com/dns-query
     - https://dns.pub/dns-query
@@ -35,7 +35,6 @@ dns:
     ipcidr:
       - 240.0.0.0/4
   fake-ip-filter:
-    - rule-set:ChinaCN_Domain,Geosite_private
     - "*.lan"
     - "*.localdomain"
     - "*.example"
