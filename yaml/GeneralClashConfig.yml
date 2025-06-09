@@ -4,6 +4,8 @@ bind-address: '*'
 mode: rule
 log-level: info
 external-controller: '127.0.0.1:9090'
+global-client-fingerprint: chrome
+global-ua: clash-verge/v1.6.6
 dns:
     enable: true
     ipv6: false
