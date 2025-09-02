@@ -6,15 +6,25 @@ log-level: info
 external-controller: '127.0.0.1:9090'
 global-client-fingerprint: chrome
 global-ua: clash-verge/v1.6.6
+tun:
+  enable: true
+  stack: mixed
+  dns-hijack:
+    - "any:53"
+    - "tcp://any:53"
+  auto-route: true
+  auto-redirect: true
+  auto-detect-interface: true
 dns:
     enable: true
     ipv6: false
-    default-nameserver: [223.5.5.5, 223.6.6.6]
-    proxy-server-nameserver: ['https://dns.alidns.com/dns-query#h3=true', 'https://223.5.5.5/dns-query', 'https://223.6.6.6/dns-query', 'tls://dns.alidns.com', 'tls://223.5.5.5:853', 'tls://223.6.6.6:853']
     enhanced-mode: fake-ip
     fake-ip-range: 198.18.0.1/16
     fake-ip-filter: ['*.lan', '*.local', '*.home.arpa', '+.gitv.tv', '+.docker.io', '+.miwifi.com', '+.safebrowsing.apple', 'Mijia Cloud', 'time.*.com', 'time.*.gov', 'time.*.edu.cn', 'time.*.apple.com', 'time-ios.apple.com', 'time1.*.com', 'time2.*.com', 'time3.*.com', 'time4.*.com', 'time5.*.com', 'time6.*.com', 'time7.*.com', 'ntp.*.com', 'ntp1.*.com', 'ntp2.*.com', 'ntp3.*.com', 'ntp4.*.com', 'ntp5.*.com', 'ntp6.*.com', 'ntp7.*.com', '*.time.edu.cn', '*.ntp.org.cn', '+.pool.ntp.org', 'time1.cloud.tencent.com', '+.pub.3gppnetwork.org', '760709.xyz','*.760709.xyz']
-    use-hosts: true
-    nameserver: ['tls://8.8.4.4:853', 'https://1.1.1.1/dns-query', 'https://doh.pub/dns-query']
-    fallback: ['tls://223.5.5.5:853', 'https://dns.alidns.com/dns-query']
-    fallback-filter: { geoip: true, ipcidr: [0.0.0.0/32] }
+    proxy-server-nameserver: ['114.114.114.114', '119.29.29.29', '8.8.8.8', '1.1.1.1']
+    nameserver-policy:
+     "geosite:cn,private":
+     - https://doh.pub/dns-query
+     - https://dns.alidns.com/dns-query
+    nameserver: ['https://doh.pub/dns-query', 'https://dns.alidns.com/dns-query']
+    default-nameserver: [223.5.5.5, 119.29.29.29]
