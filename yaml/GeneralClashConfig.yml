@@ -4,8 +4,8 @@ bind-address: '*'
 mode: rule
 log-level: info
 external-controller: '127.0.0.1:9090'
-global-client-fingerprint: chrome
-global-ua: clash-verge/v1.6.6
+global-client-fingerprint: firefox
+global-ua: clash-verge/v2.4.2
 profile:
   store-selected: true
   store-fake-ip: true
@@ -24,10 +24,15 @@ dns:
     enhanced-mode: fake-ip
     fake-ip-range: 198.18.0.1/16
     fake-ip-filter: ['*.lan', '*.local', '*.home.arpa', '+.gitv.tv', '+.docker.io', '+.miwifi.com', '+.safebrowsing.apple', 'Mijia Cloud', 'time.*.com', 'time.*.gov', 'time.*.edu.cn', 'time.*.apple.com', 'time-ios.apple.com', 'time1.*.com', 'time2.*.com', 'time3.*.com', 'time4.*.com', 'time5.*.com', 'time6.*.com', 'time7.*.com', 'ntp.*.com', 'ntp1.*.com', 'ntp2.*.com', 'ntp3.*.com', 'ntp4.*.com', 'ntp5.*.com', 'ntp6.*.com', 'ntp7.*.com', '*.time.edu.cn', '*.ntp.org.cn', '+.pool.ntp.org', 'time1.cloud.tencent.com', '+.pub.3gppnetwork.org']
-    proxy-server-nameserver: ['114.114.114.114', '119.29.29.29', '8.8.8.8', '1.1.1.1']
+    proxy-server-nameserver: ['quic://223.5.5.5:853', 'https://doh.pub/dns-query']
     nameserver-policy:
      "geosite:cn,private":
-     - https://doh.pub/dns-query
-     - https://dns.alidns.com/dns-query
-    nameserver: ['https://doh.pub/dns-query', 'https://dns.alidns.com/dns-query']
-    default-nameserver: [223.5.5.5, 119.29.29.29]
+     - quic://223.5.5.5:853
+     - 223.5.5.5
+     "geosite:cn":
+     - quic://223.5.5.5:853
+     - 223.5.5.5
+     "geosite:geolocation-!cn":
+     - https://cloudflare-dns.com/dns-query
+     - https://dns.adguard-dns.com/dns-query
+    nameserver: ['223.5.5.5', 'quic://223.5.5.5:853']	
