@@ -11,7 +11,7 @@ profile:
   store-fake-ip: true
 tun:
   enable: true
-  stack: mixed
+  stack: system
   dns-hijack:
     - "any:53"
     - "tcp://any:53"
